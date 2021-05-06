@@ -2,19 +2,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const input = document.querySelector('input[type="text"]');
     const todoList = document.querySelector('.todo');
+    const chekbox = document.querySelectorAll('input[type="checkbox"]');
     const form = document.querySelector("form");
 
     let items = JSON.parse(localStorage.getItem("todoTest"));
-    let itemsLocal = Object.values(localStorage);
-
     let storageAdd = [];
     let copyStorage = [];
-    let testarr = [];
-
-    copyStorage = testarr.concat(items);
-
-    // console.log(copyStorage);
-
+    if (items != null) { storageAdd = copyStorage.concat(items); }
 
     function loadTodo() {
         if (localStorage.getItem('todoTest')) {
@@ -34,39 +28,17 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('label[type="delete"]').forEach(i => {
             i.addEventListener("click", (e) => {
                 let parent = i.parentElement.children[1].textContent;
+                let butes = i.parentElement.children[1].attributes[0].nodeValue;
 
-                if (localStorage.getItem('todoTest')) {
-                    items.forEach((i, item, elem) => {
-                        // console.log(i);
-
-                        if (parent === i.title) {
-                            // copyStorage.splice(0, i.id);
-                            // console.log(i.id);
-                            // console.log(copyStorage);
-                        }
-                    });
-                }
-
+                // console.log(+butes);
+                // console.log(storageAdd[butes]);
+                // storageAdd.splice(+butes, 1);
+                // localStorage.setItem("todoTest", JSON.stringify(storageAdd));
+                // console.log(storageAdd);
                 i.parentElement.remove();
             });
         });
     }
-
-    function doneOrNotElement() {
-        document.querySelectorAll('input[type="checkbox"]').forEach(i => {
-            i.addEventListener("change", (e) => {
-
-                let items = JSON.parse(localStorage.getItem("todoTest"));
-
-                if (localStorage.getItem('todoTest')) {
-                    items.forEach(i => {
-                        console.log(i.done);
-                    });
-                }
-            });
-        });
-    }
-
 
     form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -96,11 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         deleteElement();
-        doneOrNotElement();
     });
 
     loadTodo();
     deleteElement();
-    doneOrNotElement();
 
 });
