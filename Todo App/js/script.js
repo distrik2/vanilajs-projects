@@ -25,16 +25,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function deleteElement() {
-        document.querySelectorAll('label[type="delete"]').forEach(i => {
+        document.querySelectorAll('label[type="delete"]').forEach((i, item) => {
             i.addEventListener("click", (e) => {
                 let parent = i.parentElement.children[1].textContent;
-                let butes = i.parentElement.children[1].attributes[0].nodeValue;
+                
+                console.log(storageAdd[item]);
+                console.log(item);
+                storageAdd.splice(item, 1);
+                localStorage.setItem("todoTest", JSON.stringify(storageAdd));
+                console.log(storageAdd);
 
-                // console.log(+butes);
-                // console.log(storageAdd[butes]);
-                // storageAdd.splice(+butes, 1);
-                // localStorage.setItem("todoTest", JSON.stringify(storageAdd));
-                // console.log(storageAdd);
                 i.parentElement.remove();
             });
         });
