@@ -1,0 +1,51 @@
+body {
+  font-family: Roboto;
+  margin: 0 auto;
+}
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+h1 {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+
+.container {
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.box {
+  margin: 5px 5px 0px 0px;
+  width: 50px;
+  height: 50px;
+  background: rgb(31, 165, 255);
+  transition: 0.1s;
+  cursor: pointer;
+}
+
+.placeSale {
+  background: rgb(173, 173, 173);
+  cursor: inherit;
+}
+
+.modal_form {
+  padding-top: 10px;
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+.hidden_sec {
+  display: none;
+  visibility: hidden;
+}
