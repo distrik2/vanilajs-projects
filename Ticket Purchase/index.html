@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <title>Hover Board Effect</title>
+    <title>Ticket Purchase</title>
   </head>
   <body>
     <div class="container">
@@ -67,11 +67,24 @@
     </div>
 
     <div class="modal_form">
-      <form action="">
-        <input name="username" type="text" placeholder="ФИО" />
-        <input name="email" type="text" placeholder="Почту" />
-        <button>Купить</button>
-      </form>
+      <div class="modal">
+        <div class="form">
+          <h1>Покупка билета</h1>
+          
+          <form action="">
+            <p>ФИО</p>
+            <input name="username" type="text" placeholder="Владимир Владимирович Путин" />
+            <p>Почта</p>
+            <input name="email" type="text" placeholder="vvp@rambler.ru" />
+            <div class="price_place">
+              <!-- <p>2 Ряд, 11 Место</p>
+              <p>К оплате: 8 675 тенге</p> -->
+            </div>
+            <button>Оплатить</button>
+          </form>
+
+        </div>
+      </div>
     </div>
 
     <script src="js/script.js"></script>

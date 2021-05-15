@@ -1,6 +1,7 @@
 body {
   font-family: Roboto;
   margin: 0 auto;
+  background-color: #242424;
 }
 ul,
 li {
@@ -39,13 +40,50 @@ a {
   cursor: inherit;
 }
 
+.hidden_sec {
+  display: none;
+  visibility: hidden;
+}
+
 .modal_form {
   padding-top: 10px;
   max-width: 660px;
   margin: 0 auto;
 }
 
-.hidden_sec {
-  display: none;
-  visibility: hidden;
+.modal {
+  width: 567px;
+  height: 559px;
+  background-color: rgb(255, 255, 255);
+}
+
+.form {
+  position: relative;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+}
+.form p {
+  margin: 0;
+  margin-top: 30px;
+  margin-bottom: 8px;
+}
+.price_place {
+  width: 454px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+input {
+  width: 446px;
+  height: 47px;
+}
+button {
+  width: 454px;
+  height: 57px;
+  background-color: #3585f7;
+  color: #ffff;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }

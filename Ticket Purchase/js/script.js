@@ -3,7 +3,9 @@
 const box = document.querySelectorAll(".box");
 const place = document.querySelectorAll("[data-place]");
 const form = document.querySelector("form");
-form.classList.add("hidden_sec");
+const priceplace = document.querySelector(".price_place");
+const modalform = document.querySelector(".modal_form");
+modalform.classList.add("hidden_sec");
 
 let items = JSON.parse(localStorage.getItem("test"));
 let arrayPush = [];
@@ -27,50 +29,55 @@ function storage() {
 }
 
 function buyPlace(place) {
-    
-    form.classList.remove("hidden_sec");
-    form.addEventListener("submit", (e) => {
-        // e.preventDefault();
+    if (!place.classList.contains("placeSale")) {
 
-        let data = new FormData(form);
-        let objForm = Object.fromEntries(data.entries());
+        modalform.classList.remove("hidden_sec");
+        priceplace.innerHTML = `
+            <p>2 Ряд, ${place.dataset.place} Место</p> <p>К оплате: 8 675 тенге</p>
+        `;
 
-        if (objForm.username !== null && objForm.username !== "" &&
-            objForm.email !== null && objForm.email !== "") {
+        form.addEventListener("submit", (e) => {
+            // e.preventDefault();
 
-            objForm.place = place.dataset.place;
+            let data = new FormData(form);
+            let objForm = Object.fromEntries(data.entries());
 
-            place.classList.add("placeSale");
-            arrayPush.push(objForm);
-            localStorage.setItem('test', JSON.stringify(arrayPush));
+            if (objForm.username !== null && objForm.username !== "" &&
+                objForm.email !== null && objForm.email !== "") {
 
-        } else {
-            console.log("чел");
-        }
+                objForm.place = place.dataset.place;
 
-        form.classList.add("hidden_sec");
-        form.reset();
-    });
+                place.classList.add("placeSale");
+                arrayPush.push(objForm);
+                localStorage.setItem('test', JSON.stringify(arrayPush));
+
+                modalform.classList.add("hidden_sec");
+                form.reset();
+
+            } else {
+                alert("чел");
+            }
+        });
+    }
 }
 
 box.forEach(i => {
     i.addEventListener("click", (e) => {
-        if (arrayPush.includes(i.dataset.place)) {
-            alert("Занято");
-        } else {
+        if (!arrayPush.includes(i.dataset.place)) {
             buyPlace(i);
         }
     });
 
-
     i.addEventListener("mouseover", (e) => {
-        e.target.style.backgroundColor = "rgb(148, 210, 252)";
+        if (!i.classList.contains("placeSale")) {
+            e.target.style.backgroundColor = "rgb(148, 210, 252)";
+        }
     });
     i.addEventListener("mouseout", (e) => {
-        e.target.style.backgroundColor = "";
+        if (!i.classList.contains("placeSale")) {
+            e.target.style.backgroundColor = "";
+        }
     });
-
-
 });
 
 storage();
