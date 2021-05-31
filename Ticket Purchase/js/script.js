@@ -5,12 +5,13 @@ const place = document.querySelectorAll("[data-place]");
 const form = document.querySelector("form");
 const priceplace = document.querySelector(".price_place");
 const modalform = document.querySelector(".modal_form");
-modalform.classList.add("hidden_sec");
 
-let items = JSON.parse(localStorage.getItem("test"));
-let arrayPush = [];
-let copyСoncat = [];
-if (localStorage.getItem('test')) { arrayPush = copyСoncat.concat(items); }
+let items;
+if (localStorage.getItem("ticketSale") == null) {
+    localStorage.setItem("ticketSale", JSON.stringify([{}]));
+} else {
+    items = JSON.parse(localStorage.getItem("ticketSale"));
+}
 
 function loadFreePlace(item) {
     place.forEach(i => {
@@ -21,12 +22,14 @@ function loadFreePlace(item) {
 }
 
 function storage() {
-    if (localStorage.getItem('test')) {
+    if (items) {
         items.forEach(i => {
             loadFreePlace(i.place);
         });
     }
 }
+
+storage();
 
 function buyPlace(place) {
     if (!place.classList.contains("placeSale")) {
@@ -37,7 +40,6 @@ function buyPlace(place) {
         `;
 
         form.addEventListener("submit", (e) => {
-            // e.preventDefault();
 
             let data = new FormData(form);
             let objForm = Object.fromEntries(data.entries());
@@ -48,14 +50,15 @@ function buyPlace(place) {
                 objForm.place = place.dataset.place;
 
                 place.classList.add("placeSale");
-                arrayPush.push(objForm);
-                localStorage.setItem('test', JSON.stringify(arrayPush));
+                items.push(objForm);
+                localStorage.setItem('ticketSale', JSON.stringify(items));
 
                 modalform.classList.add("hidden_sec");
                 form.reset();
 
             } else {
                 alert("чел");
+                e.preventDefault();
             }
         });
     }
@@ -63,9 +66,7 @@ function buyPlace(place) {
 
 box.forEach(i => {
     i.addEventListener("click", (e) => {
-        if (!arrayPush.includes(i.dataset.place)) {
-            buyPlace(i);
-        }
+        buyPlace(i);
     });
 
     i.addEventListener("mouseover", (e) => {
@@ -79,5 +80,3 @@ box.forEach(i => {
         }
     });
 });
-
-storage();
